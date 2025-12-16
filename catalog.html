@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню</title>
+    <link rel="stylesheet" href="css/css1.css">
+    <link rel="icon" type="image/png" href="img/main.svg">
+</head>
+<body>
+
+<!-- Навігаційна панель -->
+<header>
+    <nav class="navbar">
+        <div class="logo"><img src="img/main.svg" alt="Totemo oishī">Totemo oishī</div>
+        <ul class="menu">
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="catalog.html">МЕНЮ</a></li>
+            <li><a href="popular.html">Популярне</a></li>
+            <li><a href="author.html">Автор</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+
+<!-- Кошик -->
+<div class="cart-container" >
+    <h3>Ваш кошик</h3>
+    <ul id="cart-items">
+        <!-- Сюди JS буде додавати товари -->
+    </ul>
+    <p>Загальна сума: <span id="total-price">₴0</span></p>
+</div>
+
+<!-- Меню -->
+<div class="menu-container">
+    <h2>Меню Totemo oishī</h2>
+    <h1>гарячі страви</h1>
+    <div class="menu-grid">
+
+       
+
+         <div class="menu-item">
+            <img src="img/pokki.jpg" alt="Суші">
+            <h3>Ток-поккі</h3>
+            <p>Асорті зі свіжих інгредієнтів: цибуля зелена, тунець, авокадо.</p>
+            <p class="price">₴ 250</p>
+            <button class="btn add-btn">Додати</button>
+        </div>
+
+         <div class="menu-item">
+            <img src="img/ramen1.jpg" alt="Суші">
+            <h3>Рамен з свининою</h3>
+            <p>Асорті зі свіжих інгредієнтів: свинина, перець червоний, авокадо.</p>
+            <p class="price">₴ 300</p>
+            <button class="btn add-btn">Додати</button>
+        </div>
+
+         <div class="menu-item">
+            <img src="img/ramen.jpg" alt="Суші">
+            <h3>Рамен з телятиною</h3>
+            <p>Асорті зі свіжих інгредієнтів: телятина, корейська морква, авокадо.</p>
+            <p class="price">₴ 200</p>
+            <button class="btn add-btn">Додати</button>
+        </div>
+
+         <div class="menu-item">
+            <img src="img/sushi.jpg" alt="Суші">
+            <h3>Суші сет</h3>
+            <p>Асорті зі свіжих інгредієнтів: лосось, тунець, авокадо.</p>
+            <p class="price">₴ 150</p>
+            <button class="btn add-btn">Додати</button>
+        </div>
+
+        
+    </div>
+
+       
+</div>
+    
+
+
+
+<!-- напої -->
+<div class="menu-container">
+   
+    <h1>Напої</h1>
+    <div class="menu-grid">
+
+       
+
+         <div class="menu-item">
+            <img src="img/coctail.jpg" alt="Суші">
+            <h3>Фруктові коктейлі</h3>
+            <p>Асорті зі свіжих інгредієнтів: лимон, сироп, полуниця.</p>
+            <p class="price">₴ 120</p>
+            <button class="btn add-btn">Додати</button>
+        </div>
+
+         <div class="menu-item">
+            <img src="img/coffee.jpg" alt="Суші">
+            <h3>Латте</h3>
+            <p>Асорті зі свіжих інгредієнтів: кава, сироп, безлактозне молоко.</p>
+            <p class="price">₴ 80</p>
+            <button class="btn add-btn">Додати</button>
+        </div>
+
+         <div class="menu-item">
+            <img src="img/tea.jpg" alt="Суші">
+            <h3>Японський чай</h3>
+            <p>Асорті зі свіжих інгредієнтів: зелений чай.</p>
+            <p class="price">₴ 50</p>
+            <button class="btn add-btn">Додати</button>
+        </div>
+
+         <div class="menu-item">
+            <img src="img/juice.jpg" alt="Суші">
+            <h3>Сік</h3>
+            <p>Асорті зі свіжих інгредієнтів: апельсин, яблуко, полуниця.</p>
+            <p class="price">₴ 250</p>
+            <button class="btn add-btn">Додати</button>
+        </div>
+
+        
+    </div>
+
+       
+</div>
+
+
+
+
+<!-- JS -->
+<script>
+let cart = [];
+let total = 0;
+
+// Всі кнопки "Додати"
+const addButtons = document.querySelectorAll('.add-btn');
+
+addButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const menuItem = this.closest('.menu-item');
+        const name = menuItem.querySelector('h3').textContent;
+        const priceText = menuItem.querySelector('.price').textContent;
+        const price = parseFloat(priceText.replace(/[^\d]/g, ''));
+
+        // Додаємо в кошик
+        cart.push({name, price});
+        total += price;
+
+        // Оновлюємо відображення кошика
+        const cartList = document.getElementById('cart-items');
+        cartList.innerHTML = '';
+        cart.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.name} - ₴${item.price}`;
+            cartList.appendChild(li);
+        });
+
+        document.getElementById('total-price').textContent = `₴${total}`;
+    });
+});
+</script>
+
+</body>
+</html>
